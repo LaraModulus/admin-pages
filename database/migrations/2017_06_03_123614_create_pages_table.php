@@ -24,7 +24,7 @@ class CreatePagesTable extends Migration
                 $table->string('meta_keywords_' . $locale, 255)->nullable();
             }
             $table->boolean('viewable')->default(false)->index();
-            $table->string('slug');
+            $table->string('slug')->default('unset');
         });
     }
 

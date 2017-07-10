@@ -33,14 +33,14 @@ class PagesController extends Controller
 
     public function postForm(Request $request)
     {
+        if(!$request->has('slug')){
+            $request->merge(['slug' => str_slug(
+                $request->get('title_'.config('app.fallback_locale', 'en'))
+            )]);
+        }
 
-        $item = Pages::firstOrCreate(['id' => $request->get('id')]);
+        $item = Pages::firstOrNew(['id' => $request->get('id')]);
         try {
-            if(!$request->has('slug')){
-                $request->merge(['slug' => $item->createSlug(
-                    $request->get('title_'.config('app.fallback_locale', 'en'))
-                )]);
-            }
             $item->autoFill($request);
         } catch (\Exception $e) {
             return redirect()->back()->withInput()->withErrors(['errors' => $e->getMessage()]);
@@ -77,7 +77,7 @@ class PagesController extends Controller
 
     public function dataTable()
     {
-        $items = Pages::select(['id','title_en','created_at', 'updated_at']);
+        $items = Pages::select(['id','title_'.config('app.fallback_locale', 'en'),'created_at', 'updated_at', 'viewable']);
 
         return DataTables::of($items)
             ->addColumn('action', function ($item) {

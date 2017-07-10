@@ -18,7 +18,7 @@ class Pages extends Model
     protected $guarded = ['id'];
 
     protected $casts = [
-
+        'viewable' => 'boolean'
     ];
 
     protected $dates = ['deleted_at'];
@@ -30,6 +30,7 @@ class Pages extends Model
         'viewable',
         'slug'
     ];
+
 
     public function __construct(array $attributes = [])
     {
@@ -52,22 +53,27 @@ class Pages extends Model
 
     public function getTitleAttribute()
     {
-        return $this->{'title_' . config('app.fallback_locale', 'en')};
+        return $this->{'title_' . config('app.locale', 'en')};
     }
 
     public function getMetaTitleAttribute()
     {
-        return $this->{'meta_title_' . config('app.fallback_locale', 'en')};
+        return $this->{'meta_title_' . config('app.locale', 'en')};
     }
 
     public function getMetaDescriptionAttribute()
     {
-        return $this->{'meta_description_' . config('app.fallback_locale', 'en')};
+        return $this->{'meta_description_' . config('app.locale', 'en')};
     }
 
     public function getMetaKeywordsAttribute()
     {
-        return $this->{'meta_keywords_' . config('app.fallback_locale', 'en')};
+        return $this->{'meta_keywords_' . config('app.locale', 'en')};
+    }
+
+    public function setViewableAttribute($value)
+    {
+        $this->attributes['viewable'] = $value ?: false;
     }
 
     protected function bootIfNotBooted()

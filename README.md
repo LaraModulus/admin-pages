@@ -15,7 +15,7 @@ composer require laramod/admin-pages
 ```php 
 'providers' => [
     ...
-    LaraMod\AdminPages\AdminPagesServiceProvider::class,
+    LaraMod\Admin\Pages\AdminPagesServiceProvider::class,
 ]
 ```
 **Publish migrations**
