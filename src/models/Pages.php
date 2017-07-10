@@ -56,6 +56,11 @@ class Pages extends Model
         return $this->{'title_' . config('app.locale', 'en')};
     }
 
+    public function getContentAttribute()
+    {
+        return $this->{'content_' . config('app.fallback_locale', 'en')};
+    }
+
     public function getMetaTitleAttribute()
     {
         return $this->{'meta_title_' . config('app.locale', 'en')};
