@@ -8,14 +8,14 @@ https://github.com/LaraModulus
 Installation
 ---------------
 ```
-composer require laramod\admin-pages
+composer require laramod/admin-pages
 ```
  **config/app.php**
  
 ```php 
 'providers' => [
     ...
-    LaraMod\AdminPages\AdminPagesServiceProvider::class,
+    LaraMod\Admin\Pages\AdminPagesServiceProvider::class,
 ]
 ```
 **Publish migrations**
